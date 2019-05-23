@@ -84,8 +84,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-#production:
-  #<<: *default
-  #database: unist-map_production
-  #username: Suton
-  #password: <%= ENV["36407455750"] %>
+production:
+  <<: *default
+  database: unist-map_production
+  username: Suton
+  password: 36407455750
