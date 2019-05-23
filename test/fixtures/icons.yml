@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sastavnica: MyText
+  boja: MyText
+  vidljivost: MyText
+
+two:
+  sastavnica: MyText
+  boja: MyText
+  vidljivost: MyText

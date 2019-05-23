@@ -1,0 +1,45 @@
+<header id = "unist-header">
+    <div id = "primary-header">
+        <div id = "unist">
+        	<img id = "logo" src = "/unist-logo.gif">
+        	<span id = "title">Interaktivna karta sveučilišta u Splitu</span>
+        </div>
+        <div id = "header-icons">
+        	<%= link_to 'BACK', admin_path, :class => "btn btn-light btn-sm"%>
+        </div>
+    </div>
+</header>
+<div class = "center-div1">
+<%= form_for :marker, url: {:action => "create", :controller => "map"} do |f| %>
+	<div id = "form-container" class = "d-flex justify-content-center">
+		<div class = "center jumbotron">
+			<form role = "form" >
+				<div class = "row">
+					<div class = "col">
+						<label for = "latitude">Latitude</label>
+						<%= f.text_field :latitude, :class => 'form-control', :id => "latitude", :name => "marker[latitude]", :placeholder => "Npr. 43.514500"%>
+					</div>
+    				<div class = "col">
+    					<label for = "longitude">Longitude</label>
+      					<%= f.text_field :longitude, :class => "form-control", :id => "longitude", :name => "marker[longitude]", :placeholder => "Npr. 16.451630" %>
+    				</div>
+  				</div>
+  				<label class = "my-1 mr-2" for = "sastavnica">Sastavnica</label>
+  				<%= f.select :sastavnica, @info.collect { |i| [i[:sastavnica]] }, {}, {:class => "custom-select my-1 mr-sm-2", :id => "sastavnica", :name => "marker[sastavnica]"} %>
+  				<div class = "form-group">
+    				<label for = "naziv">Naziv</label>
+    				<%= f.text_field :naziv, :class => "form-control", :id => "naziv", :name => "marker[naziv]", :placeholder => "Naziv" %>
+  				</div>
+  				<div class = "form-group">
+    				<label for = "adresa">Adresa</label>
+    				<%= f.text_field :adresa, :class => "form-control", :id => "adresa", :name => "marker[adresa]", :placeholder => "Adresa" %>
+  				</div>
+  				<div class="form-group">
+    				<label for = "web">Web</label>
+    				<%= f.text_field :web, :class => "form-control", :id => "web", :name => "marker[web]", :placeholder => "Web" %>
+  				</div>
+  				<%= f.submit :class => "btn btn-primary", :type => "submit", :value => "Submit" %>
+ 			</form>
+		</div>
+	</div>
+<% end %>

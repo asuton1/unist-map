@@ -1,0 +1,65 @@
+<header id = "unist-header">
+    <div id = "primary-header">
+        <div id = "unist">
+            <img id = "logo" src = "/unist-logo.gif">
+            <span id = "title">Interaktivna karta <span id = "mob">sveučilišta u Splitu<span></span>
+        </div>
+        <div id = "header-icons">
+            <%= link_to "ADMIN", admin_path, :id => "admin", :class => "btn btn-light btn-sm"%>
+            <button type = "button" id = "info" class="btn btn-light btn-sm">MARKERI</button>
+            <button type = "button" id = "menu" class="btn btn-light btn-sm">MENU</button>
+
+        </div>
+    </div>
+    <div id = "secondary-header" class = "hidden">
+        <div id = "fakultet" class = "selected clickable">Fakulteti</div>
+        <div id = "odjel" class = "clickable">Odjeli</div>
+        <div id = "akademija" class = "selected clickable">Akademije</div>
+        <div id = "infrastrukt" class = "clickable">Infrastrukturne jedinice</div>
+        <div id = "menza" class = "selected clickable">Menze</div>
+        <div id = "dom" class = "clickable">Studentski domovi</div>
+        <div id = "udruga" class = "clickable">Studentske udruge</div>
+    </div>
+</header>
+<div id = "overlay">
+    <div id = "overlay-box">
+        <img id = "exit" class = "clickable" src = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Grey_close_x.svg/1024px-Grey_close_x.svg.png">
+        <div id = "information">
+            <div class = "information-icon">
+                <img id = "tlocrt" src = "/tlocrt.png">
+                <span>Tlocrt sveučilišnih objekata</span>
+            </div>
+            <% @info.each do |i| %>
+                <div class = "information-icon">
+                    <img class = "icon-image" src = "<%= i[:boja] %>">
+                    <span><%= i[:sastavnica] %></span>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+<div id = "mapid"></div>
+<script>
+	var mymap = L.map('mapid').setView([43.514500, 16.451630], 14);
+	L.tileLayer('https://api.mapbox.com/styles/v1/asuton/cjtg12fxq00f41flfhbfs0nuh/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    	maxZoom: 20,
+    	id: 'mapbox',
+    	accessToken: 'pk.eyJ1IjoiYXN1dG9uIiwiYSI6ImNqdGJidW9sZTBlNm4zeW56djRxODdtMnkifQ.22Y2qFashDLW4lbkedxKeA'
+	}).addTo(mymap);
+</script>
+<script>
+	<% @markeri.each do |marker| %>
+	   var icon = L.icon({
+            iconUrl: "<%= marker[:boja] %>",
+            iconSize: [40, 46],
+            iconAnchor: [20, 45],
+            popupAnchor: [1, -34],
+	       });
+        marker = L.marker([<%= marker[:latitude] %>, <%= marker[:longitude] %>], {icon: icon, title: "<%= marker[:naziv] %>"});
+        var popup = "<%= marker[:naziv] %>" + "<br>" + "<%= marker[:adresa] %>" + "<br>" + "<a target='_blank' href=<%= marker[:web] %>>" + "<%= marker[:web] %>" + "</a>";
+        marker.addTo(mymap).bindPopup(popup);
+        marker._icon.classList.add("<%= marker[:sastavnica].delete(' ') %>");
+        marker._icon.classList.add("<%= marker[:vidljivost] %>")
+	<% end %>
+</script>

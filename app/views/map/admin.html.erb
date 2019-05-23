@@ -1,0 +1,41 @@
+<header id = "unist-header">
+    <div id = "primary-header">
+        <div id = "unist">
+            <img id = "logo" src = "/unist-logo.gif">
+            <span id = "title">Interaktivna karta sveučilišta u Splitu</span>
+        </div>
+        <div id = "header-icons">
+            <%= link_to 'NEW MARKER', new_map_path, :class => "btn btn-light btn-sm"%>
+            <%= link_to 'BACK', root_path, :class => "btn btn-light btn-sm"%>
+        </div>
+    </div>
+</header>
+<div id = "marker-table">
+    <table id = "table" class="table table-bordered table-hover">
+        <thead class = "thead-light">
+            <th scope = "col">#</th>
+            <th scope = "col">Sastavnica</th>
+            <th scope = "col">Naziv</th>
+            <th scope = "col">Adresa</th>
+            <th scope = "col">Web</th>
+            <th scope = "col">Lat/Lng</th>
+            <th scope = "col">Delete</th>
+        </thead>
+        <tbody>
+            <% redniBroj = 1 %>
+            <% @tablica.each do |row| %>
+                <tr>
+                    <th scope = "row"><%= redniBroj %></th>
+                    <td><%= row[:sastavnica] %></td>
+                    <td><%= row[:naziv] %></td>
+                    <td><%= row[:adresa] %></td>
+                    <td><%= row[:web] %></td>
+                    <td><%= row[:latitude] %><br><%= row[:longitude] %></td>
+                    <td><%= button_to 'Delete', map_path(row), :class => "btn btn-danger", method: :delete,
+                                data: {confirm: "Sigurno želite izbrisati #{row[:naziv]}"} %></td>    
+                </tr>
+                <% redniBroj += 1 %>
+            <% end %>
+        </tbody>
+    </table>
+</div>

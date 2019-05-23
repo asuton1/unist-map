@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  latitude: MyText
+  longitude: MyText
+  sastavnica: MyText
+  naziv: MyText
+  adresa: MyText
+  web: MyText
+
+two:
+  id: 1
+  latitude: MyText
+  longitude: MyText
+  sastavnica: MyText
+  naziv: MyText
+  adresa: MyText
+  web: MyText
