@@ -174,4 +174,7 @@ th, td{
     #mob{
         display: none;
     }
+    #menu{
+        display: none;
+    }
 }
